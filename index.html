@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d32">
+  <meta name="description" content="Explora las flores y plantas de Minecraft: biomas, curiosidades y secretos de cada especie.">
+  <title>Herbario de bloques | Enciclopedia Minecraft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --forest: #173d32;
+      --forest-deep: #102c25;
+      --leaf: #567b4d;
+      --lime: #d2e768;
+      --coral: #eb7659;
+      --sky: #d7edf0;
+      --paper: #f7f5eb;
+      --white: #fffef8;
+      --ink: #233a30;
+      --muted: #65746b;
+      --line: #dfe4d6;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "DM Sans", "Trebuchet MS", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+
+    .topbar {
+      min-height: 72px;
+      padding: 0 max(24px, calc((100% - 1120px) / 2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: var(--forest-deep);
+      color: var(--white);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      aspect-ratio: 1;
+      place-items: center;
+      background: var(--lime);
+      color: var(--forest-deep);
+      font-size: 19px;
+    }
+    .topbar nav { display: flex; align-items: center; gap: 28px; }
+    .topbar nav a {
+      color: #d4e0d5;
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+    .topbar nav a:hover, .topbar nav a:focus-visible { color: var(--lime); }
+
+    .intro {
+      position: relative;
+      overflow: hidden;
+      min-height: 370px;
+      padding: 70px max(24px, calc((100% - 1120px) / 2)) 68px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 48px;
+      background-color: var(--forest);
+      background-image: repeating-linear-gradient(135deg, transparent 0 34px, rgb(255 255 255 / 2.3%) 34px 35px);
+      color: var(--white);
+    }
+    .section-tag {
+      display: inline-block;
+      color: var(--coral);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+    .intro .section-tag { color: var(--lime); }
+    .intro h1 {
+      max-width: 580px;
+      margin: 15px 0 17px;
+      font: 600 54px/1.05 var(--serif);
+    }
+    .intro p {
+      max-width: 510px;
+      margin: 0;
+      color: #d1e0d4;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .hero-garden {
+      position: relative;
+      min-height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-garden::before {
+      position: absolute;
+      width: min(340px, 90%);
+      aspect-ratio: 1;
+      border: 1px solid rgb(210 231 104 / 32%);
+      border-radius: 50%;
+      content: "";
+    }
+    .hero-garden::after {
+      position: absolute;
+      width: min(260px, 68%);
+      aspect-ratio: 1;
+      border: 1px dashed rgb(210 231 104 / 26%);
+      border-radius: 50%;
+      content: "";
+    }
+    .hero-sprite {
+      z-index: 1;
+      width: 138px;
+      height: 156px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgb(255 255 255 / 18%);
+      background: #f0db9c;
+      box-shadow: 8px 8px 0 rgb(16 44 37 / 28%);
+      transform: rotate(-5deg);
+      animation: rise-in 550ms both;
+    }
+    .hero-sprite img { width: 102px; height: 112px; object-fit: contain; image-rendering: pixelated; }
+    .hero-sprite small {
+      position: absolute;
+      right: -20px;
+      bottom: -13px;
+      padding: 7px 10px;
+      background: var(--lime);
+      color: var(--forest-deep);
+      font-size: 10px;
+      font-weight: 700;
+      transform: rotate(5deg);
+    }
+    .hero-stamp {
+      position: absolute;
+      z-index: 2;
+      top: 20px;
+      right: 13%;
+      display: grid;
+      width: 67px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgb(255 255 255 / 38%);
+      border-radius: 50%;
+      color: var(--lime);
+      font-size: 25px;
+      transform: rotate(12deg);
+    }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(14px) rotate(-5deg); }
+      to { opacity: 1; transform: translateY(0) rotate(-5deg); }
+    }
+
+    .catalogo {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 76px 24px 88px;
+    }
+    .catalogo-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    h2 {
+      margin: 10px 0 8px;
+      font: 600 36px/1.15 var(--serif);
+    }
+    .catalogo-heading p, .curiosidad p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .contador {
+      padding-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .contador strong { color: var(--forest); }
+    .busqueda {
+      max-width: 520px;
+      height: 48px;
+      margin-top: 32px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #cbd5c8;
+      background: var(--white);
+      color: var(--leaf);
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+    .busqueda:focus-within { border-color: var(--leaf); box-shadow: 0 0 0 3px rgb(86 123 77 / 12%); }
+    .busqueda svg { flex: 0 0 auto; }
+    .busqueda input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .busqueda input::placeholder { color: #849087; }
+    .filtros {
+      margin: 20px 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filtro {
+      min-height: 36px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: #586960;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+    }
+    .filtro:hover { border-color: var(--leaf); color: var(--forest); }
+    .filtro.activo { border-color: var(--forest); background: var(--forest); color: var(--white); }
+    .filtro:focus-visible, .plant-card button:focus-visible, .btn:focus-visible, dialog button:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 3px;
+    }
+    .grid-flores {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .plant-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--white);
+      animation: card-in 360ms both;
+    }
+    @keyframes card-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .card-art {
+      position: relative;
+      height: 164px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .card-art::after {
+      position: absolute;
+      right: -32px;
+      bottom: -46px;
+      width: 150px;
+      height: 110px;
+      border: 1px solid rgb(35 58 48 / 12%);
+      border-radius: 50%;
+      content: "";
+    }
+    .card-art[data-tone="1"] { background: #e9efd5; }
+    .card-art[data-tone="2"] { background: #f3dfd1; }
+    .card-art[data-tone="3"] { background: #dcebed; }
+    .card-art[data-tone="0"] { background: #efe8c9; }
+    .card-art img {
+      z-index: 1;
+      width: 108px;
+      height: 118px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      filter: drop-shadow(3px 5px 0 rgb(35 58 48 / 10%));
+      transition: transform 180ms ease;
+    }
+    .plant-card:hover .card-art img { transform: translateY(-4px) scale(1.04); }
+    .plant-fallback { z-index: 1; font-size: 66px; }
+    .card-body { padding: 15px 16px 16px; }
+    .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .card-category { color: var(--leaf); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .card-biome { color: #849087; font-size: 10px; text-align: right; }
+    .plant-card h3 { margin: 9px 0 5px; font: 600 19px/1.2 var(--serif); }
+    .plant-card p { min-height: 38px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .plant-card button {
+      margin-top: 13px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--forest);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .plant-card button span { color: var(--coral); }
+    .sin-resultados {
+      margin: 35px 0 0;
+      padding: 32px 20px;
+      border: 1px dashed #bdc9b9;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .curiosidad {
+      max-width: 1120px;
+      margin: 0 auto 82px;
+      padding: 31px 34px;
+      display: grid;
+      grid-template-columns: 54px 1fr auto;
+      align-items: center;
+      gap: 22px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .curiosidad-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: var(--lime);
+      font-size: 25px;
+    }
+    .curiosidad h2 { margin: 6px 0; font-size: 25px; }
+    .curiosidad p { max-width: 650px; font-size: 12px; }
+    .btn {
+      min-height: 42px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--forest);
+      background: transparent;
+      color: var(--forest);
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 150ms ease, color 150ms ease;
+    }
+    .btn:hover { background: var(--forest); color: var(--white); }
+    footer {
+      padding: 22px 24px;
+      background: var(--forest-deep);
+      color: #d4e0d5;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    dialog {
+      width: min(460px, calc(100% - 32px));
+      padding: 0;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: 0 24px 80px rgb(16 44 37 / 28%);
+    }
+    dialog::backdrop { background: rgb(16 44 37 / 62%); }
+    .dialog-art { height: 180px; display: grid; place-items: center; background: var(--sky); }
+    .dialog-art img { width: 120px; height: 140px; object-fit: contain; image-rendering: pixelated; }
+    .dialog-content { padding: 24px; }
+    .dialog-content h2 { margin: 7px 0 10px; font-size: 30px; }
+    .dialog-content p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .dialog-fact { margin-top: 18px !important; padding-top: 14px; border-top: 1px solid var(--line); }
+    .dialog-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .intro { grid-template-columns: 1.2fr .8fr; gap: 20px; }
+      .intro h1 { font-size: 46px; }
+      .hero-sprite { width: 118px; height: 138px; }
+      .grid-flores { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .curiosidad { margin-right: 24px; margin-left: 24px; }
+    }
+    @media (max-width: 600px) {
+      .topbar { min-height: 62px; padding: 0 18px; }
+      .brand { font-size: 13px; }
+      .topbar nav { gap: 15px; }
+      .topbar nav a { font-size: 11px; }
+      .intro {
+        min-height: auto;
+        padding: 54px 22px 44px;
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .intro h1 { max-width: 440px; font-size: 43px; }
+      .intro p { font-size: 14px; }
+      .hero-garden { min-height: 185px; }
+      .hero-sprite { width: 106px; height: 122px; }
+      .hero-sprite img { width: 78px; height: 86px; }
+      .hero-stamp { top: 9px; right: 16%; width: 54px; font-size: 20px; }
+      .catalogo { padding: 55px 18px 60px; }
+      .catalogo-heading { align-items: start; flex-direction: column; gap: 10px; }
+      h2 { font-size: 31px; }
+      .catalogo-heading p { font-size: 13px; }
+      .busqueda { max-width: none; margin-top: 25px; }
+      .filtros { margin: 16px 0 22px; gap: 7px; }
+      .filtro { min-height: 34px; padding: 0 10px; font-size: 11px; }
+      .grid-flores { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+      .card-art { height: 130px; }
+      .card-art img { width: 88px; height: 100px; }
+      .card-body { padding: 12px 11px 13px; }
+      .card-meta { align-items: start; flex-direction: column; gap: 4px; }
+      .card-biome { text-align: left; }
+      .plant-card h3 { font-size: 17px; }
+      .plant-card p { min-height: 54px; font-size: 11px; }
+      .curiosidad {
+        margin: 0 18px 56px;
+        padding: 24px 0;
+        grid-template-columns: 46px 1fr;
+        gap: 14px;
+      }
+      .curiosidad-icon { width: 44px; height: 44px; font-size: 22px; }
+      .curiosidad h2 { font-size: 22px; }
+      .curiosidad p { font-size: 11px; }
+      .curiosidad .btn { grid-column: 2; justify-self: start; }
+    }
+    @media (max-width: 360px) {
+      .topbar nav { gap: 10px; }
+      .brand { gap: 7px; font-size: 11px; }
+      .brand-mark { width: 30px; }
+      .plant-card p { min-height: 68px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Herbario de bloques, inicio">
+      <span class="brand-mark" aria-hidden="true">✿</span>
+      <span>HERBARIO DE BLOQUES</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#catalogo">Colección</a>
+      <a href="#acerca">Acerca de</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" id="inicio" aria-labelledby="intro-title">
+      <div>
+        <span class="section-tag">BIENVENIDO EXPLORADOR</span>
+        <h1 id="intro-title">Un mundo lleno de color</h1>
+        <p>Desde las flores más comunes de las praderas hasta las plantas misteriosas de otros biomas, cada especie tiene algo especial que descubrir.</p>
+      </div>
+      <div class="hero-garden" aria-hidden="true">
+        <span class="hero-stamp">✳</span>
+        <div class="hero-sprite">
+          <img src="https://minecraft.wiki/Special:FilePath/Poppy%20JE8%20BE2.png" alt="">
+          <small>ESPÉCIMEN 001</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalogo" id="catalogo" aria-labelledby="catalogo-title">
+      <div class="catalogo-heading">
+        <div>
+          <span class="section-tag">HERBARIO DIGITAL</span>
+          <h2 id="catalogo-title">Explora la colección</h2>
+          <p>Selecciona una planta para conocer todos sus secretos.</p>
+        </div>
+        <div class="contador" id="contador" aria-live="polite">Cargando colección...</div>
+      </div>
+
+      <label class="busqueda">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+        <input id="buscador" type="search" placeholder="Busca una flor por su nombre..." autocomplete="off" aria-label="Buscar una planta">
+      </label>
+
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoría">
+        <button class="filtro activo" type="button" data-categoria="Todas" aria-pressed="true">🌱 Todas</button>
+        <button class="filtro" type="button" data-categoria="Pequeñas" aria-pressed="false">🌷 Pequeñas</button>
+        <button class="filtro" type="button" data-categoria="Altas" aria-pressed="false">🌻 Altas</button>
+        <button class="filtro" type="button" data-categoria="Especiales" aria-pressed="false">✨ Especiales</button>
+        <button class="filtro" type="button" data-categoria="Follaje" aria-pressed="false">🍃 Follaje</button>
+      </div>
+
+      <div class="grid-flores" id="gridFlores" aria-live="polite"></div>
+      <p class="sin-resultados" id="sinResultados" hidden>No encontramos esa planta. ¡Prueba con otro nombre! 🌿</p>
+    </section>
+
+    <section class="curiosidad" id="acerca" aria-labelledby="curiosidad-title">
+      <div class="curiosidad-icon" aria-hidden="true">🌱</div>
+      <div>
+        <span class="section-tag">¿SABÍAS QUE...?</span>
+        <h2 id="curiosidad-title">Las flores son más que decoración</h2>
+        <p>Muchas flores sirven para fabricar tintes, atraer abejas y decorar construcciones. Algunas plantas especiales tienen mecánicas únicas que vale la pena descubrir.</p>
+      </div>
+      <a href="https://minecraft.wiki/w/Flower" target="_blank" rel="noopener noreferrer" class="btn">Consultar la wiki <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer>Un pequeño herbario para exploradores de todos los biomas.</footer>
+
+  <dialog id="detalle" aria-labelledby="detalleNombre">
+    <button class="dialog-close" type="button" aria-label="Cerrar ficha">×</button>
+    <div class="dialog-art"><img id="detalleImagen" alt="" hidden><span id="detalleFallback" hidden aria-hidden="true"></span></div>
+    <div class="dialog-content">
+      <span class="section-tag" id="detalleCategoria"></span>
+      <h2 id="detalleNombre"></h2>
+      <p id="detalleDescripcion"></p>
+      <p class="dialog-fact" id="detalleDato"></p>
+    </div>
+  </dialog>
+
+  <script>
+    const plantas = [
+      { nombre: "Amapola", categoria: "Pequeñas", bioma: "Praderas", resumen: "Un toque rojo que alegra cualquier pradera.", dato: "Se puede convertir en tinte rojo y también sirve para elaborar tinte de rosa roja en versiones antiguas.", archivo: "Poppy JE8 BE2.png", emoji: "🌺" },
+      { nombre: "Diente de león", categoria: "Pequeñas", bioma: "Praderas", resumen: "Amarilla, sencilla y favorita de las abejas.", dato: "Su flor permite fabricar tinte amarillo. También se usa para acelerar el crecimiento de crías de conejo.", archivo: "Dandelion JE7 BE2.png", emoji: "🌼" },
+      { nombre: "Orquídea azul", categoria: "Pequeñas", bioma: "Pantanos", resumen: "Una flor azul poco común entre los juncos.", dato: "Solo aparece de forma natural en pantanos y manglares. Al crear tinte, produce dos unidades de tinte celeste.", archivo: "Blue Orchid JE4 BE2.png", emoji: "🪻" },
+      { nombre: "Allium", categoria: "Pequeñas", bioma: "Bosques floridos", resumen: "Una silueta violeta en los bosques más coloridos.", dato: "Crece en bosques floridos y sirve para fabricar tinte magenta.", archivo: "Allium JE3 BE2.png", emoji: "🌷" },
+      { nombre: "Tulipán rojo", categoria: "Pequeñas", bioma: "Praderas", resumen: "Un clásico encendido de las llanuras.", dato: "Los tulipanes aparecen en cuatro colores y cada uno produce un tinte distinto.", archivo: "Tulip (red) JE3 BE2.png", emoji: "🌷" },
+      { nombre: "Tulipán naranja", categoria: "Pequeñas", bioma: "Praderas", resumen: "Una pincelada cálida entre la hierba.", dato: "Su color naranja también puede obtenerse mezclando tintes rojo y amarillo.", archivo: "Tulip (orange) JE3 BE2.png", emoji: "🌷" },
+      { nombre: "Tulipán blanco", categoria: "Pequeñas", bioma: "Praderas", resumen: "Luz suave para jardines de cualquier tamaño.", dato: "Al colocarlo en una mesa de trabajo, se convierte en tinte gris claro.", archivo: "Tulip (white) JE3 BE2.png", emoji: "🌷" },
+      { nombre: "Margarita", categoria: "Pequeñas", bioma: "Praderas", resumen: "Pétalos claros con un centro de color dorado.", dato: "La margarita produce tinte gris claro y atrae a las abejas cercanas.", archivo: "Oxeye Daisy JE3 BE2.png", emoji: "🌼" },
+      { nombre: "Aciano", categoria: "Pequeñas", bioma: "Praderas", resumen: "Una pequeña flor azul que destaca a distancia.", dato: "Es la fuente natural de tinte azul, sin necesidad de lapislázuli.", archivo: "Cornflower JE3 BE2.png", emoji: "💠" },
+      { nombre: "Lirio de los valles", categoria: "Pequeñas", bioma: "Bosques", resumen: "Una flor blanca que crece en rincones tranquilos.", dato: "Se encuentra en bosques y permite fabricar tinte blanco.", archivo: "Lily of the Valley JE3 BE2.png", emoji: "🌱" },
+      { nombre: "Girasol", categoria: "Altas", bioma: "Praderas", resumen: "Siempre mira hacia el este, incluso al amanecer.", dato: "Los girasoles apuntan al este y dan dos unidades de tinte amarillo.", archivo: "Sunflower JE4 BE2.png", emoji: "🌻" },
+      { nombre: "Lila", categoria: "Altas", bioma: "Bosques", resumen: "Flores violetas en dos bloques de altura.", dato: "Al romper una lila se obtienen dos unidades de tinte magenta.", archivo: "Lilac JE3 BE2.png", emoji: "🪻" },
+      { nombre: "Rosal", categoria: "Altas", bioma: "Bosques", resumen: "Un arbusto alto cubierto de flores rojas.", dato: "Este arbusto mide dos bloques y puede transformarse en dos tintes rojos.", archivo: "Rose Bush JE3 BE2.png", emoji: "🌹" },
+      { nombre: "Peonía", categoria: "Altas", bioma: "Bosques", resumen: "Grandes pétalos rosados para jardines silvestres.", dato: "Las peonías producen dos unidades de tinte rosa al usarlas en una mesa de trabajo.", archivo: "Peony JE3 BE2.png", emoji: "🌸" },
+      { nombre: "Rosa del Wither", categoria: "Especiales", bioma: "Cualquier bioma", resumen: "Hermosa y peligrosa: puede causar marchitamiento.", dato: "Aparece cuando el Wither derrota a una criatura. Su contacto aplica el efecto de marchitamiento.", archivo: "Wither Rose JE2 BE2.png", emoji: "🥀" },
+      { nombre: "Antorcha floral", categoria: "Especiales", bioma: "Arqueología", resumen: "Una flor antigua que cuenta historias del pasado.", dato: "Sus semillas se consiguen al oler huevos sospechosos en ruinas oceánicas cálidas.", archivo: "Torchflower JE1 BE1.png", emoji: "🌺" },
+      { nombre: "Planta jarra", categoria: "Especiales", bioma: "Arqueología", resumen: "Una planta prehistórica que alcanza dos bloques.", dato: "Su vaina se encuentra con el olfateador. Produce tinte cian y una planta de dos bloques de alto.", archivo: "Pitcher Plant JE1 BE1.png", emoji: "🪴" },
+      { nombre: "Helecho", categoria: "Follaje", bioma: "Taiga", resumen: "Follaje silvestre para rincones más frondosos.", dato: "Con tijeras puedes recoger helechos y usarlos como decoración en macetas.", archivo: "Fern JE2 BE2.png", emoji: "🌿" },
+      { nombre: "Helecho grande", categoria: "Follaje", bioma: "Taiga", resumen: "Una planta alta que crea capas de vegetación.", dato: "Puede aparecer de forma natural en taigas y taigas de árboles gigantes.", archivo: "Large Fern JE2 BE2.png", emoji: "🌿" },
+      { nombre: "Arbusto seco", categoria: "Follaje", bioma: "Desiertos", resumen: "Una planta resistente de los paisajes áridos.", dato: "Crece en desiertos y tierras baldías; al romperlo puede soltar palos.", archivo: "Dead Bush JE3 BE2.png", emoji: "🪵" }
+    ];
+
+    const grid = document.querySelector("#gridFlores");
+    const contador = document.querySelector("#contador");
+    const buscador = document.querySelector("#buscador");
+    const sinResultados = document.querySelector("#sinResultados");
+    const filtros = [...document.querySelectorAll(".filtro")];
+    const detalle = document.querySelector("#detalle");
+    let categoriaActiva = "Todas";
+
+    function urlImagen(archivo) {
+      const imagenesConfirmadas = {
+        "Poppy JE8 BE2.png": "https://minecraft.wiki/images/Poppy_JE8_BE2.png",
+        "Dandelion JE7 BE2.png": "https://minecraft.wiki/images/Dandelion_JE7_BE4.png",
+        "Allium JE3 BE2.png": "https://minecraft.wiki/images/Allium_JE7_BE2.png",
+        "Cornflower JE3 BE2.png": "https://minecraft.wiki/images/Cornflower_JE1_BE1.png",
+        "Sunflower JE4 BE2.png": "https://minecraft.wiki/images/Sunflower_JE6.png",
+        "Lilac JE3 BE2.png": "https://minecraft.wiki/images/Lilac_JE4_BE2.png",
+        "Peony JE3 BE2.png": "https://minecraft.wiki/images/Peony_JE4_BE3.png",
+        "Torchflower JE1 BE1.png": "https://minecraft.wiki/images/Torchflower_JE1_BE1.png",
+        "Fern JE2 BE2.png": "https://minecraft.wiki/images/Fern_JE6.png"
+      };
+      return imagenesConfirmadas[archivo] ?? null;
+    }
+
+    function crearTarjeta(planta, indice) {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "plant-card";
+      tarjeta.style.animationDelay = `${Math.min(indice * 25, 200)}ms`;
+      tarjeta.innerHTML = `
+        <div class="card-art" data-tone="${indice % 4}">
+          <img src="${urlImagen(planta.archivo)}" alt="${planta.nombre}" loading="lazy">
+          <span class="plant-fallback" hidden aria-hidden="true">${planta.emoji}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-category">${planta.categoria}</span><span class="card-biome">${planta.bioma}</span></div>
+          <h3>${planta.nombre}</h3>
+          <p>${planta.resumen}</p>
+          <button type="button">Descubrir más <span aria-hidden="true">↗</span></button>
+        </div>`;
+      const imagen = tarjeta.querySelector("img");
+      const fallback = tarjeta.querySelector(".plant-fallback");
+      const fuente = urlImagen(planta.archivo);
+      if (fuente) {
+        imagen.src = fuente;
+        imagen.hidden = false;
+        imagen.addEventListener("error", () => {
+          imagen.hidden = true;
+          fallback.hidden = false;
+        }, { once: true });
+      } else {
+        fallback.hidden = false;
+      }
+      tarjeta.querySelector("button").addEventListener("click", () => abrirDetalle(planta));
+      return tarjeta;
+    }
+
+    function mostrarPlantas() {
+      const consulta = buscador.value.trim().toLocaleLowerCase("es");
+      const visibles = plantas.filter((planta) => {
+        const coincideCategoria = categoriaActiva === "Todas" || planta.categoria === categoriaActiva;
+        const texto = `${planta.nombre} ${planta.bioma} ${planta.categoria}`.toLocaleLowerCase("es");
+        return coincideCategoria && texto.includes(consulta);
+      });
+      grid.replaceChildren(...visibles.map(crearTarjeta));
+      contador.innerHTML = `<strong>${visibles.length}</strong> ${visibles.length === 1 ? "especie" : "especies"} en la colección`;
+      sinResultados.hidden = visibles.length > 0;
+    }
+
+    function abrirDetalle(planta) {
+      const imagen = document.querySelector("#detalleImagen");
+      const fallback = document.querySelector("#detalleFallback");
+      const fuente = urlImagen(planta.archivo);
+      imagen.alt = planta.nombre;
+      imagen.hidden = !fuente;
+      fallback.textContent = planta.emoji;
+      fallback.hidden = Boolean(fuente);
+      if (fuente) imagen.src = fuente;
+      document.querySelector("#detalleCategoria").textContent = `${planta.categoria} · ${planta.bioma}`;
+      document.querySelector("#detalleNombre").textContent = planta.nombre;
+      document.querySelector("#detalleDescripcion").textContent = planta.resumen;
+      document.querySelector("#detalleDato").textContent = planta.dato;
+      detalle.showModal();
+    }
+
+    buscador.addEventListener("input", mostrarPlantas);
+    filtros.forEach((filtro) => filtro.addEventListener("click", () => {
+      categoriaActiva = filtro.dataset.categoria;
+      filtros.forEach((boton) => {
+        const activo = boton === filtro;
+        boton.classList.toggle("activo", activo);
+        boton.setAttribute("aria-pressed", String(activo));
+      });
+      mostrarPlantas();
+    }));
+    document.querySelector(".dialog-close").addEventListener("click", () => detalle.close());
+    document.querySelector("#detalleImagen").addEventListener("error", (evento) => {
+      evento.currentTarget.hidden = true;
+      document.querySelector("#detalleFallback").hidden = false;
+    });
+    detalle.addEventListener("click", (evento) => {
+      if (evento.target === detalle) detalle.close();
+    });
+
+    mostrarPlantas();
+  </script>
+</body>
+</html>
